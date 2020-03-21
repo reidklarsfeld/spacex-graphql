@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+
 export const QUERY_LAUNCH_PROFILE = gql`
     query LaunchListYear ($launch_year: String!) {
         launches(find: {launch_year: $launch_year}) {
@@ -35,6 +36,7 @@ export const QUERY_LAUNCH_PROFILE = gql`
             launch_date_local
             links {
                 video_link
+            }
         }
     }
 `;
