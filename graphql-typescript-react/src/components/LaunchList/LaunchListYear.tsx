@@ -1,14 +1,17 @@
-import * as React from 'react';
-import { LaunchListQuery } from '../../generated/graphql';
+import React from 'react';
 import './styles.css';
 
-interface Props {
-  data: LaunchListQuery;
-}
+
 const className = 'LaunchList';
 
-const LaunchList: React.FC<Props> = ({ data }) => (
+const LaunchListYear: React.FC<any> = ({ data }) => {
+  console.log(data)
+  return (
   <div className={className}>
+    {!data
+      ? <div>Loading...</div>
+      :
+      <div>
     <h3>Launches</h3>
     <ol className={`${className}__list`}>
       {!!data.launches &&
@@ -26,7 +29,10 @@ const LaunchList: React.FC<Props> = ({ data }) => (
             ),
         )}
     </ol>
-  </div>
-);
+    </div>
+    }
+  </div>       
+  )
+};
 
-export default LaunchList;
+export default LaunchListYear;
