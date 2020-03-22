@@ -7,7 +7,7 @@ interface Props {
 }
 const className = 'LaunchList';
 
-const LaunchList: React.FC<Props> = ({ data }) => (
+const LaunchListDefault: React.FC<Props> = ({ data }) => (
   <div className={className}>
     <h3>Launches</h3>
     <ol className={`${className}__list`}>
@@ -29,4 +29,4 @@ const LaunchList: React.FC<Props> = ({ data }) => (
   </div>
 );
 
-export default LaunchList;
+export default LaunchListDefault;

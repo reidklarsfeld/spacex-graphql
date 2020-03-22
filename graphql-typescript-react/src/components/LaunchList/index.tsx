@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useLaunchListQuery } from '../../generated/graphql';
-import LaunchList from './LaunchList';
+import LaunchListDefault from './LaunchListDefault';
 import './styles.css';
 
 const LaunchListContainer = () => {
@@ -11,6 +11,6 @@ const LaunchListContainer = () => {
   if (error || !data) {
     return <div>ERROR</div>;
   }
-  return <LaunchList data={data} />;
+  return <LaunchListDefault data={data} />;
 };
 export default LaunchListContainer;
