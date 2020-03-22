@@ -1694,3 +1694,4 @@ export function useMissionsNamesLazyQuery(baseOptions?: ApolloReactHooks.LazyQue
         }
 export type MissionsNamesQueryHookResult = ReturnType<typeof useMissionsNamesQuery>;
 export type MissionsNamesLazyQueryHookResult = ReturnType<typeof useMissionsNamesLazyQuery>;
+export type MissionsNamesQueryResult = ApolloReactCommon.QueryResult<MissionsNamesQuery, MissionsNamesQueryVariables>;
