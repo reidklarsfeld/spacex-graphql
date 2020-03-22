@@ -1347,10 +1347,32 @@ export type LaunchListRocketNameQuery = (
   )>>> }
 );
 
+export type RocketsNamesQueryVariables = {};
+
+
+export type RocketsNamesQuery = (
+  { __typename?: 'Query' }
+  & { rockets?: Maybe<Array<Maybe<(
+    { __typename?: 'Rocket' }
+    & Pick<Rocket, 'name'>
+  )>>> }
+);
+
+export type MissionsNamesQueryVariables = {};
+
+
+export type MissionsNamesQuery = (
+  { __typename?: 'Query' }
+  & { missions?: Maybe<Array<Maybe<(
+    { __typename?: 'Mission' }
+    & Pick<Mission, 'name'>
+  )>>> }
+);
+
 
 export const LaunchListDocument = gql`
     query LaunchList {
-  launches {
+  launches(sort: "launch_date_local") {
     mission_name
     rocket {
       rocket_name
@@ -1406,7 +1428,7 @@ export type LaunchListLazyQueryHookResult = ReturnType<typeof useLaunchListLazyQ
 export type LaunchListQueryResult = ApolloReactCommon.QueryResult<LaunchListQuery, LaunchListQueryVariables>;
 export const LaunchListYearDocument = gql`
     query LaunchListYear($launch_year: String!) {
-  launches(find: {launch_year: $launch_year}) {
+  launches(find: {launch_year: $launch_year}, sort: "launch_date_local") {
     mission_name
     rocket {
       rocket_name
@@ -1533,9 +1555,10 @@ export const LaunchListRocketNameDocument = gql`
 }
     `;
 export type LaunchListRocketNameComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<LaunchListRocketNameQuery, LaunchListRocketNameQueryVariables>, 'query'> & ({ variables: LaunchListRocketNameQueryVariables; skip?: boolean; } | { skip: boolean; });
-export const LaunchListRocketNameComponent = (props: LaunchListRocketNameComponentProps) => (
-  <ApolloReactComponents.Query<LaunchListRocketNameQuery, LaunchListRocketNameQueryVariables> query={LaunchListRocketNameDocument} {...props} />
-);
+
+    export const LaunchListRocketNameComponent = (props: LaunchListRocketNameComponentProps) => (
+      <ApolloReactComponents.Query<LaunchListRocketNameQuery, LaunchListRocketNameQueryVariables> query={LaunchListRocketNameDocument} {...props} />
+    );
     
 export type LaunchListRocketNameProps<TChildProps = {}> = ApolloReactHoc.DataProps<LaunchListRocketNameQuery, LaunchListRocketNameQueryVariables> & TChildProps;
 export function withLaunchListRocketName<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
@@ -1574,3 +1597,100 @@ export function useLaunchListRocketNameLazyQuery(baseOptions?: ApolloReactHooks.
 export type LaunchListRocketNameQueryHookResult = ReturnType<typeof useLaunchListRocketNameQuery>;
 export type LaunchListRocketNameLazyQueryHookResult = ReturnType<typeof useLaunchListRocketNameLazyQuery>;
 export type LaunchListRocketNameQueryResult = ApolloReactCommon.QueryResult<LaunchListRocketNameQuery, LaunchListRocketNameQueryVariables>;
+export const RocketsNamesDocument = gql`
+    query RocketsNames {
+  rockets {
+    name
+  }
+}
+    `;
+export type RocketsNamesComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<RocketsNamesQuery, RocketsNamesQueryVariables>, 'query'>;
+
+    export const RocketsNamesComponent = (props: RocketsNamesComponentProps) => (
+      <ApolloReactComponents.Query<RocketsNamesQuery, RocketsNamesQueryVariables> query={RocketsNamesDocument} {...props} />
+    );
+    
+export type RocketsNamesProps<TChildProps = {}> = ApolloReactHoc.DataProps<RocketsNamesQuery, RocketsNamesQueryVariables> & TChildProps;
+export function withRocketsNames<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  RocketsNamesQuery,
+  RocketsNamesQueryVariables,
+  RocketsNamesProps<TChildProps>>) {
+    return ApolloReactHoc.withQuery<TProps, RocketsNamesQuery, RocketsNamesQueryVariables, RocketsNamesProps<TChildProps>>(RocketsNamesDocument, {
+      alias: 'rocketsNames',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useRocketsNamesQuery__
+ *
+ * To run a query within a React component, call `useRocketsNamesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRocketsNamesQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRocketsNamesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useRocketsNamesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<RocketsNamesQuery, RocketsNamesQueryVariables>) {
+        return ApolloReactHooks.useQuery<RocketsNamesQuery, RocketsNamesQueryVariables>(RocketsNamesDocument, baseOptions);
+      }
+export function useRocketsNamesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<RocketsNamesQuery, RocketsNamesQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<RocketsNamesQuery, RocketsNamesQueryVariables>(RocketsNamesDocument, baseOptions);
+        }
+export type RocketsNamesQueryHookResult = ReturnType<typeof useRocketsNamesQuery>;
+export type RocketsNamesLazyQueryHookResult = ReturnType<typeof useRocketsNamesLazyQuery>;
+export type RocketsNamesQueryResult = ApolloReactCommon.QueryResult<RocketsNamesQuery, RocketsNamesQueryVariables>;
+export const MissionsNamesDocument = gql`
+    query MissionsNames {
+  missions {
+    name
+  }
+}
+    `;
+export type MissionsNamesComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<MissionsNamesQuery, MissionsNamesQueryVariables>, 'query'>;
+
+    export const MissionsNamesComponent = (props: MissionsNamesComponentProps) => (
+      <ApolloReactComponents.Query<MissionsNamesQuery, MissionsNamesQueryVariables> query={MissionsNamesDocument} {...props} />
+    );
+    
+export type MissionsNamesProps<TChildProps = {}> = ApolloReactHoc.DataProps<MissionsNamesQuery, MissionsNamesQueryVariables> & TChildProps;
+export function withMissionsNames<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  MissionsNamesQuery,
+  MissionsNamesQueryVariables,
+  MissionsNamesProps<TChildProps>>) {
+    return ApolloReactHoc.withQuery<TProps, MissionsNamesQuery, MissionsNamesQueryVariables, MissionsNamesProps<TChildProps>>(MissionsNamesDocument, {
+      alias: 'missionsNames',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useMissionsNamesQuery__
+ *
+ * To run a query within a React component, call `useMissionsNamesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMissionsNamesQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMissionsNamesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMissionsNamesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<MissionsNamesQuery, MissionsNamesQueryVariables>) {
+        return ApolloReactHooks.useQuery<MissionsNamesQuery, MissionsNamesQueryVariables>(MissionsNamesDocument, baseOptions);
+      }
+export function useMissionsNamesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<MissionsNamesQuery, MissionsNamesQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<MissionsNamesQuery, MissionsNamesQueryVariables>(MissionsNamesDocument, baseOptions);
+        }
+export type MissionsNamesQueryHookResult = ReturnType<typeof useMissionsNamesQuery>;
+export type MissionsNamesLazyQueryHookResult = ReturnType<typeof useMissionsNamesLazyQuery>;
