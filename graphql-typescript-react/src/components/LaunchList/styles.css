@@ -2,7 +2,7 @@
     height: 90vh;
     overflow: hidden auto;
     background-color: #ececec;
-    width: 500px;
+    width: 450px;
     padding-left: 20px;
     padding-right: 20px;
     position:absolute;
@@ -22,7 +22,7 @@
     cursor: pointer;
   }
 
-  .launchload {
+  .LaunchLoad {
     height: 70vh;
     position: absolute;
     bottom: 0px;

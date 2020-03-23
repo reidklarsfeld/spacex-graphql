@@ -5,15 +5,15 @@ import './styles.css';
 
 interface Props {
   data: RocketsNamesQuery;
+  handleIdChange: (newId?: number) => void;
 }
 const className = 'LaunchListRocketName';
 
-const LaunchSearchRockets: React.FC<Props> = ({ data }) => {
+const LaunchSearchRockets: React.FC<Props> = ({ data, handleIdChange }) => {
   const [selected, setSelected ] = useState('Falcon 1')
   const handleChange = React.useCallback(e => {
     return setSelected(e.target.value)
   }, []);
-  console.log(selected)
 
   const { data: rocketData } = useLaunchListRocketNameQuery(
     {variables: { rocket_name : selected }}
@@ -32,7 +32,7 @@ const LaunchSearchRockets: React.FC<Props> = ({ data }) => {
                     </option>
                 )}
             </select>
-            <LaunchListRocketName data={rocketData} />
+            <LaunchListRocketName handleIdChange={handleIdChange} data={rocketData} />
         </div>
     </div>
   );
