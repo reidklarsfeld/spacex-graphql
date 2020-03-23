@@ -1276,7 +1276,7 @@ export type LaunchListQuery = (
   { __typename?: 'Query' }
   & { launches?: Maybe<Array<Maybe<(
     { __typename?: 'Launch' }
-    & Pick<Launch, 'mission_name' | 'launch_date_local'>
+    & Pick<Launch, 'id' | 'mission_name' | 'launch_date_local'>
     & { rocket?: Maybe<(
       { __typename?: 'LaunchRocket' }
       & Pick<LaunchRocket, 'rocket_name'>
@@ -1296,7 +1296,7 @@ export type LaunchListYearQuery = (
   { __typename?: 'Query' }
   & { launches?: Maybe<Array<Maybe<(
     { __typename?: 'Launch' }
-    & Pick<Launch, 'mission_name' | 'launch_date_local'>
+    & Pick<Launch, 'id' | 'mission_name' | 'launch_date_local'>
     & { rocket?: Maybe<(
       { __typename?: 'LaunchRocket' }
       & Pick<LaunchRocket, 'rocket_name'>
@@ -1316,7 +1316,7 @@ export type LaunchListMissionNameQuery = (
   { __typename?: 'Query' }
   & { launches?: Maybe<Array<Maybe<(
     { __typename?: 'Launch' }
-    & Pick<Launch, 'mission_name' | 'launch_date_local'>
+    & Pick<Launch, 'id' | 'mission_name' | 'launch_date_local'>
     & { rocket?: Maybe<(
       { __typename?: 'LaunchRocket' }
       & Pick<LaunchRocket, 'rocket_name'>
@@ -1336,7 +1336,7 @@ export type LaunchListRocketNameQuery = (
   { __typename?: 'Query' }
   & { launches?: Maybe<Array<Maybe<(
     { __typename?: 'Launch' }
-    & Pick<Launch, 'mission_name' | 'launch_date_local'>
+    & Pick<Launch, 'id' | 'mission_name' | 'launch_date_local'>
     & { rocket?: Maybe<(
       { __typename?: 'LaunchRocket' }
       & Pick<LaunchRocket, 'rocket_name'>
@@ -1345,6 +1345,26 @@ export type LaunchListRocketNameQuery = (
       & Pick<LaunchLinks, 'video_link'>
     )> }
   )>>> }
+);
+
+export type LaunchProfileQueryVariables = {
+  id: Scalars['ID'];
+};
+
+
+export type LaunchProfileQuery = (
+  { __typename?: 'Query' }
+  & { launch?: Maybe<(
+    { __typename?: 'Launch' }
+    & Pick<Launch, 'mission_name' | 'launch_date_local' | 'launch_success' | 'details'>
+    & { rocket?: Maybe<(
+      { __typename?: 'LaunchRocket' }
+      & Pick<LaunchRocket, 'rocket_name'>
+    )>, links?: Maybe<(
+      { __typename?: 'LaunchLinks' }
+      & Pick<LaunchLinks, 'video_link' | 'flickr_images' | 'mission_patch' | 'wikipedia'>
+    )> }
+  )> }
 );
 
 export type RocketsNamesQueryVariables = {};
@@ -1363,9 +1383,9 @@ export type MissionsNamesQueryVariables = {};
 
 export type MissionsNamesQuery = (
   { __typename?: 'Query' }
-  & { missions?: Maybe<Array<Maybe<(
-    { __typename?: 'Mission' }
-    & Pick<Mission, 'name'>
+  & { launches?: Maybe<Array<Maybe<(
+    { __typename?: 'Launch' }
+    & Pick<Launch, 'mission_name'>
   )>>> }
 );
 
@@ -1373,6 +1393,7 @@ export type MissionsNamesQuery = (
 export const LaunchListDocument = gql`
     query LaunchList {
   launches(sort: "launch_date_local") {
+    id
     mission_name
     rocket {
       rocket_name
@@ -1429,6 +1450,7 @@ export type LaunchListQueryResult = ApolloReactCommon.QueryResult<LaunchListQuer
 export const LaunchListYearDocument = gql`
     query LaunchListYear($launch_year: String!) {
   launches(find: {launch_year: $launch_year}, sort: "launch_date_local") {
+    id
     mission_name
     rocket {
       rocket_name
@@ -1486,6 +1508,7 @@ export type LaunchListYearQueryResult = ApolloReactCommon.QueryResult<LaunchList
 export const LaunchListMissionNameDocument = gql`
     query LaunchListMissionName($mission_name: String!) {
   launches(find: {mission_name: $mission_name}) {
+    id
     mission_name
     rocket {
       rocket_name
@@ -1543,6 +1566,7 @@ export type LaunchListMissionNameQueryResult = ApolloReactCommon.QueryResult<Lau
 export const LaunchListRocketNameDocument = gql`
     query LaunchListRocketName($rocket_name: String!) {
   launches(find: {rocket_name: $rocket_name}) {
+    id
     mission_name
     rocket {
       rocket_name
@@ -1597,6 +1621,68 @@ export function useLaunchListRocketNameLazyQuery(baseOptions?: ApolloReactHooks.
 export type LaunchListRocketNameQueryHookResult = ReturnType<typeof useLaunchListRocketNameQuery>;
 export type LaunchListRocketNameLazyQueryHookResult = ReturnType<typeof useLaunchListRocketNameLazyQuery>;
 export type LaunchListRocketNameQueryResult = ApolloReactCommon.QueryResult<LaunchListRocketNameQuery, LaunchListRocketNameQueryVariables>;
+export const LaunchProfileDocument = gql`
+    query LaunchProfile($id: ID!) {
+  launch(id: $id) {
+    mission_name
+    launch_date_local
+    launch_success
+    rocket {
+      rocket_name
+    }
+    links {
+      video_link
+      flickr_images
+      mission_patch
+      wikipedia
+    }
+    details
+  }
+}
+    `;
+export type LaunchProfileComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<LaunchProfileQuery, LaunchProfileQueryVariables>, 'query'> & ({ variables: LaunchProfileQueryVariables; skip?: boolean; } | { skip: boolean; });
+
+    export const LaunchProfileComponent = (props: LaunchProfileComponentProps) => (
+      <ApolloReactComponents.Query<LaunchProfileQuery, LaunchProfileQueryVariables> query={LaunchProfileDocument} {...props} />
+    );
+    
+export type LaunchProfileProps<TChildProps = {}> = ApolloReactHoc.DataProps<LaunchProfileQuery, LaunchProfileQueryVariables> & TChildProps;
+export function withLaunchProfile<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  LaunchProfileQuery,
+  LaunchProfileQueryVariables,
+  LaunchProfileProps<TChildProps>>) {
+    return ApolloReactHoc.withQuery<TProps, LaunchProfileQuery, LaunchProfileQueryVariables, LaunchProfileProps<TChildProps>>(LaunchProfileDocument, {
+      alias: 'launchProfile',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useLaunchProfileQuery__
+ *
+ * To run a query within a React component, call `useLaunchProfileQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLaunchProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLaunchProfileQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useLaunchProfileQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<LaunchProfileQuery, LaunchProfileQueryVariables>) {
+        return ApolloReactHooks.useQuery<LaunchProfileQuery, LaunchProfileQueryVariables>(LaunchProfileDocument, baseOptions);
+      }
+export function useLaunchProfileLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<LaunchProfileQuery, LaunchProfileQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<LaunchProfileQuery, LaunchProfileQueryVariables>(LaunchProfileDocument, baseOptions);
+        }
+export type LaunchProfileQueryHookResult = ReturnType<typeof useLaunchProfileQuery>;
+export type LaunchProfileLazyQueryHookResult = ReturnType<typeof useLaunchProfileLazyQuery>;
+export type LaunchProfileQueryResult = ApolloReactCommon.QueryResult<LaunchProfileQuery, LaunchProfileQueryVariables>;
 export const RocketsNamesDocument = gql`
     query RocketsNames {
   rockets {
@@ -1648,8 +1734,8 @@ export type RocketsNamesLazyQueryHookResult = ReturnType<typeof useRocketsNamesL
 export type RocketsNamesQueryResult = ApolloReactCommon.QueryResult<RocketsNamesQuery, RocketsNamesQueryVariables>;
 export const MissionsNamesDocument = gql`
     query MissionsNames {
-  missions {
-    name
+  launches(sort: "launch_date_local") {
+    mission_name
   }
 }
     `;

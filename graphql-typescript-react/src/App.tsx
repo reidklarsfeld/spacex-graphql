@@ -1,11 +1,17 @@
-import React from 'react';
-import LaunchSearchBar from './components/LaunchSearchBar';
+import React, { useState } from 'react';
+import LaunchSearch from './components/LaunchSearch';
+import LaunchProfile from './components/LaunchProfile';
 import './App.css';
 
 const App = () => {
+  const [id, setId] = useState('1');
+  const handleIdChange = React.useCallback(newId => {
+    setId(newId);
+  }, []);
   return (
     <div className="App">
-      <LaunchSearchBar />
+      <LaunchSearch handleIdChange={handleIdChange} />
+      <LaunchProfile id={id} />
     </div>
   );
 };

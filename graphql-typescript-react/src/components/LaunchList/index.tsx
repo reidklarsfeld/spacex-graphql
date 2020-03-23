@@ -3,14 +3,18 @@ import { useLaunchListQuery } from '../../generated/graphql';
 import LaunchListDefault from './LaunchListDefault';
 import './styles.css';
 
-const LaunchListContainer = () => {
+export interface OwnProps {
+  handleIdChange: (newId?: number) => void;
+}
+
+const LaunchListContainer = ({ handleIdChange }) => {
   const { data, error, loading } = useLaunchListQuery();
   if (loading) {
-    return <div className='launchload'>Loading SpaceX Launches...</div>;
+    return <div className='LaunchLoad'>Loading SpaceX Launches...</div>;
   }
   if (error || !data) {
     return <div>ERROR</div>;
   }
-  return <LaunchListDefault data={data} />;
+  return <LaunchListDefault handleIdChange={handleIdChange} data={data} />;
 };
 export default LaunchListContainer;

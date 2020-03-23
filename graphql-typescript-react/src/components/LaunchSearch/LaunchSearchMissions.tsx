@@ -5,12 +5,13 @@ import './styles.css';
 
 interface Props {
   data: MissionsNamesQuery;
+  handleIdChange: (newId?: number) => void;
 };
 
 const className = 'LaunchListMissionName';
 
-const LaunchSearchMissions: React.FC<Props> = ({ data }) => {
-  const [selected, setSelected] = useState('Thaicom')
+const LaunchSearchMissions: React.FC<Props> = ({ data, handleIdChange }) => {
+  const [selected, setSelected] = useState('FalconSat')
   const handleChange = React.useCallback(e => {
     return setSelected(e.target.value)
   }, []);
@@ -27,13 +28,13 @@ const LaunchSearchMissions: React.FC<Props> = ({ data }) => {
     <div className={className}>
         <div className={`${className}__status`}>
             <select className='missionsearch' onChange={handleChange}>
-                {data.missions && data.missions.map((mission, i) => 
-                    <option key={i} value={mission && mission.name} >
-                        {mission && mission.name}
+                {data.launches && data.launches.map((mission, i) => 
+                    <option key={i} value={mission && mission.mission_name} >
+                        {mission && mission.mission_name}
                     </option>
                 )}
             </select>
-            <LaunchListMissionName data={nameData} />
+            <LaunchListMissionName handleIdChange={handleIdChange} data={nameData} />
         </div>
     </div>
   );
