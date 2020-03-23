@@ -1,11 +1,15 @@
 import React from 'react';
+import { LaunchListYearQuery } from '../../generated/graphql';
 import './styles.css';
 
+interface Props {
+  data: LaunchListYearQuery
+  handleIdChange: (newId?: number) => void;
+}
 
 const className = 'LaunchList';
 
-const LaunchListYear: React.FC<any> = ({ data }) => {
-  console.log(data)
+const LaunchListYear: React.FC<Props> = ({ data, handleIdChange }) => {
   return (
   <div className={className}>
     {!data
@@ -17,7 +21,9 @@ const LaunchListYear: React.FC<any> = ({ data }) => {
       {!!data.launches &&
         data.launches.map((launch, i) => 
             !!launch && (
-              <li key={i} className={`${className}__item`}>
+              <li key={i} 
+              className={`${className}__item`}
+              onClick={() => handleIdChange(Number(launch.id))}>
                 Mission Name: {launch.mission_name} 
                 <br/>
                 Rocket Name: {launch.rocket && launch.rocket.rocket_name}

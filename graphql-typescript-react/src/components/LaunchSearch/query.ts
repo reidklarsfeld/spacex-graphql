@@ -8,8 +8,8 @@ export const QUERY_LAUNCH_PROFILE = gql`
     }
 
     query MissionsNames {
-        missions {
-            name
+        launches(sort: "launch_date_local") {
+            mission_name 
         }
     }
 `;

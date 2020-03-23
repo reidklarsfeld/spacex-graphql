@@ -4,17 +4,21 @@ import './styles.css';
 
 interface Props {
   data: LaunchListQuery;
+  handleIdChange: (newId?: number) => void;
 }
+
 const className = 'LaunchList';
 
-const LaunchListDefault: React.FC<Props> = ({ data }) => (
+const LaunchListDefault: React.FC<Props> = ({ data, handleIdChange  }) => (
   <div className={className}>
     <h3>Launches</h3>
     <ol className={`${className}__list`}>
       {!!data.launches &&
         data.launches.map((launch, i) => 
             !!launch && (
-              <li key={i} className={`${className}__item`}>
+              <li key={i} 
+                  className={`${className}__item`}
+                  onClick={() => handleIdChange(Number(launch.id!))}>
                 Mission Name: {launch.mission_name} 
                 <br/>
                 Rocket Name: {launch.rocket && launch.rocket.rocket_name}
