@@ -2,6 +2,7 @@ import React from 'react';
 import { useLaunchProfileQuery } from '../../generated/graphql';
 import LaunchProfile from './LaunchProfile';
 
+//need to create TypeScript OwnProps of id to pass id prop from App parent component
 interface OwnProps {
     id?: string;
   }

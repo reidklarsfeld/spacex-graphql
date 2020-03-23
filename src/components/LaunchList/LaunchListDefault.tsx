@@ -2,6 +2,7 @@ import * as React from 'react';
 import { LaunchListQuery } from '../../generated/graphql';
 import './styles.css';
 
+// add handleIdChange as a Prop to allow prop-drilling of handleIdChange function from parent component
 interface Props {
   data: LaunchListQuery;
   handleIdChange: (newId?: number) => void;

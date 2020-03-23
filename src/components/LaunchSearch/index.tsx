@@ -7,7 +7,9 @@ import LaunchListDefault from '../LaunchList';
 import './styles.css'
 
 const LaunchSearchContainer = ({ handleIdChange }) => {
+  //use custom React Hook to update Launch search parameters based on client choice
   const [searchParam, setSearchParam] = useState('Default');
+
   const { data: rocketNameData, error: errorRocketNameData, loading: loadingRocketNameData} = useRocketsNamesQuery();
   const { data: missionNameData, error: errorMissionNameData, loading: loadingMissionNameData} = useMissionsNamesQuery();
 
@@ -22,7 +24,7 @@ const LaunchSearchContainer = ({ handleIdChange }) => {
   }
 
   return (
-    <div>
+    <div className='LeftPanel'>
       <div className={className}>
         <div className={`${className}__status`}>
           Search By:

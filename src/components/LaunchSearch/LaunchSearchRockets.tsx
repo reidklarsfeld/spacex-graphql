@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { RocketsNamesQuery, useLaunchListRocketNameQuery } from '../../generated/graphql';
 import LaunchListRocketName from '../LaunchList/LaunchListRocketName';
 import './styles.css';
@@ -11,8 +11,9 @@ interface Props {
 const className = 'LaunchListSearch';
 
 const LaunchSearchRockets: React.FC<Props> = ({ data, handleIdChange }) => {
-  const [selected, setSelected ] = useState('Falcon 1')
-  const handleChange = React.useCallback(e => {
+  const [selected, setSelected] = useState('Falcon 1');
+
+  const handleChange = useCallback(e => {
     return setSelected(e.target.value)
   }, []);
 

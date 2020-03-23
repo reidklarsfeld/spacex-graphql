@@ -7,6 +7,7 @@ export const QUERY_LAUNCH_SEARCH = gql`
     }
   }
 
+  # sort option is to ensure order is chronological
   query MissionsNames {
     launches(sort: "launch_date_local") {
       mission_name 

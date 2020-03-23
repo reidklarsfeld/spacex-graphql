@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { MissionsNamesQuery, useLaunchListMissionNameQuery } from '../../generated/graphql';
 import LaunchListMissionName from '../LaunchList/LaunchListMissionName';
 import './styles.css';
 
+//add handleIdChange Prop to accept function from parent component
 interface Props {
   data: MissionsNamesQuery;
   handleIdChange: (newId?: number) => void;
@@ -11,8 +12,9 @@ interface Props {
 const className = 'LaunchListSearch';
 
 const LaunchSearchMissions: React.FC<Props> = ({ data, handleIdChange }) => {
-  const [selected, setSelected] = useState('FalconSat')
-  const handleChange = React.useCallback(e => {
+  const [selected, setSelected] = useState('FalconSat');
+
+  const handleChange = useCallback(e => {
     return setSelected(e.target.value)
   }, []);
 

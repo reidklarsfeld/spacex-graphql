@@ -12,6 +12,7 @@ const LaunchProfile: React.FC<Props> = ({ data }) => {
   if (!data.launch) {
     return <div>No launch available</div>;
   }
+  
   return (
     <div className={className}>
       <div className={`${className}__status`}>
