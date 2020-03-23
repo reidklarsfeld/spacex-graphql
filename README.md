@@ -1,4 +1,4 @@
-## Reid's SpaceX Adventure Extravaganza
+## SpaceX Launch Application
 
 Have you ever wanted to learn more about advanced rocket and spacecraft launches? Then you've come to the right place! This application provides users with up-to-date information on SpaceX's previous and upcoming launches, including in-depth data such as mission names, launch dates, rocket names, video links, and much more. Created with a tech stack that includes TypeScript, React(Hooks), Apollo GraphQL, and Node.js, please feel free to fork and/or clone the codebase and test it out!
 
