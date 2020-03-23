@@ -1,6 +1,6 @@
 ## SpaceX Launch Application
 
-Have you ever wanted to learn more about advanced rocket and spacecraft launches? Then you've come to the right place! This application provides users with up-to-date information on SpaceX's previous and upcoming launches, including in-depth data such as mission names, launch dates, rocket names, video links, and much more. Created with a tech stack that includes TypeScript, React(Hooks), Apollo GraphQL, and Node.js, please feel free to fork and/or clone the codebase and test it out!
+Have you ever wanted to learn more about advanced rocket and spacecraft launches? Then you've come to the right place! This application provides users with up-to-date information on SpaceX's previous and upcoming launches, including in-depth data such as mission names, launch dates, rocket names, video links, and much more. Created with a tech stack that includes TypeScript, React(Hooks), and Apollo GraphQL, please feel free to fork and/or clone the codebase and test it out!
 
 ## Installation
 
@@ -48,7 +48,6 @@ Additionally, upon clicking a launch within the Launch List, a Launch Profile wi
 - TypeScript
 - GraphQL
 - Apollo Client(Hooks)
-- Node.js
 
 ## License
 
