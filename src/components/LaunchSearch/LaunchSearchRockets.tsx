@@ -8,7 +8,7 @@ interface Props {
   handleIdChange: (newId?: number) => void;
 }
 
-const className = 'LaunchListRocketName';
+const className = 'LaunchListSearch';
 
 const LaunchSearchRockets: React.FC<Props> = ({ data, handleIdChange }) => {
   const [selected, setSelected ] = useState('Falcon 1')
@@ -27,15 +27,15 @@ const LaunchSearchRockets: React.FC<Props> = ({ data, handleIdChange }) => {
   return (
     <div className={className}>
       <div className={`${className}__status`}>
-        <select className='rocketsearch' onChange={handleChange}>
+        <select className='search' onChange={handleChange}>
           {data.rockets && data.rockets.map((rocket, i) => 
             <option key={i} value={rocket && rocket.name}>
                 {rocket && rocket.name}
             </option>
             )}
         </select>
-        <LaunchListRocketName handleIdChange={handleIdChange} data={rocketData} />
       </div>
+      <LaunchListRocketName handleIdChange={handleIdChange} data={rocketData} />
     </div>
   );
 };

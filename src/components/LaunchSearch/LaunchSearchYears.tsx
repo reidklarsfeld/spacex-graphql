@@ -7,7 +7,7 @@ interface Props {
   handleIdChange: (newId?: number) => void;
 };
 
-const className = 'LaunchListYears';
+const className = 'LaunchListSearch';
 const years = ['2006', '2007', '2008', '2009', '2010', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'];
 
 const LaunchSearchYears: React.FC<Props> = ({ handleIdChange }) => {
@@ -23,15 +23,15 @@ const LaunchSearchYears: React.FC<Props> = ({ handleIdChange }) => {
   return (
     <div className={className}>
       <div className={`${className}__status`}>
-        <select className='yearsearch' onChange={handleChange} >
+        <select className='search' onChange={handleChange} >
           {years.map((year, i) => 
             <option key={i} value = {year}>
               {year}
             </option>
           )}
         </select>
-        <LaunchListYear handleIdChange={handleIdChange} data={yearData} />
       </div>
+      <LaunchListYear handleIdChange={handleIdChange} data={yearData} />
     </div>
   );
 };

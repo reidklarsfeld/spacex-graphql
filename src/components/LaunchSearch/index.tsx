@@ -4,6 +4,7 @@ import LaunchSearchRockets from './LaunchSearchRockets';
 import LaunchSearchMissions from './LaunchSearchMissions';
 import LaunchSearchYears from './LaunchSearchYears';
 import LaunchListDefault from '../LaunchList';
+import './styles.css'
 
 const LaunchSearchContainer = ({ handleIdChange }) => {
   const [searchParam, setSearchParam] = useState('Default');
@@ -67,7 +68,7 @@ const LaunchSearchContainer = ({ handleIdChange }) => {
             Launch Year
           </label>
           <br/>
-          {searchParam === 'Rocket Names' &&
+        {searchParam === 'Rocket Names' &&
           <LaunchSearchRockets handleIdChange={ handleIdChange } data={rocketNameData} />
           }
           {searchParam === 'Mission Names' &&
